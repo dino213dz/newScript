@@ -57,11 +57,12 @@ nb_args=$#
 for no_arg in $(seq 0 $nb_args); do
 	value=${args[$no_arg]}
 	if [ ${#value} -gt 0 ];then
-		#parametre speciaux
-		#affichage aide 
 		if [ "$value" = "--help" ] || [ "$value" = "-h" ];then
-			echo -e "S.O.S!"
+			echo -e "Show help and quit"
 			exit
+		fi
+		if [ "$value" = "--param" ] || [ "$value" = "-p" ];then
+			paramValue=${args[$(($no_arg+1))]}
 		fi
 	fi
 done
