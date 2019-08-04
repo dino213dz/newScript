@@ -1,0 +1,74 @@
+#!/bin/bash
+######################################################################
+# SCRIPT NAME : __SCRIPTNAME__
+######################################################################
+#
+# __AUTHOR__
+# __EMAIL__
+# __WEBSITE__
+#
+# Description: __DESCRIPTION__
+# Created: __DATECREATED__
+# Updated: __DATEUPDATED__
+# Version: __VERSION__
+#		___.___    ~            _____________
+#		\  \\  \   ,, ???      |        '\\\\\\
+#		 \  \\  \ /<   ?       |        ' ____|_
+#		  --\//,- \_.  /_____  |        '||::::::
+#		      o- /   \_/    '\ |        '||_____|
+#		      | \ '   o       '________|_____|
+#		      |  )-   #     <  ___/____|___\___
+#		      `_/'------------|    _    '  <<<:|
+#	        	  /________\| |_________'___o_o|
+#
+######################################################################
+# VARIABLES: 
+######################################################################
+
+#SCRIPT VARS:
+__VARSFX___author="__AUTHOR__"
+__VARSFX___email="__EMAIL__"
+__VARSFX___website="__WEBSITE__"
+__VARSFX___version="__VERSION__"
+__VARSFX___created="__DATECREATED__"
+__VARSFX___updated="__DATEUPDATED__"
+
+#STYLE VARS:
+declare -A __VARSFX___colors=( ['red']="\033[1;31m" ['yellow']="\033[1;33m" ['green']="\033[1;32m" ['cyan']="\033[1;36m" ['blue']="\033[1;34m" ['magenta']="\033[1;35m" ['white']="\033[1;37m" ['black']="\033[1;30m" )
+declare -A __VARSFX___styles=( ['reset']="\033[0m" ['italic']="\033[1;31m" ['bold']="\033[1;31m" ['underlined']="\033[1;31m" ['blink']="\033[1;31m" )
+declare -A __VARSFX___puces=( ['plus']="[+] " ['minus']=" |_[-] " )
+
+#TEXTE STYLES VARS
+style_title=${__VARSFX___colors["yellow"]}""${__VARSFX___puces["plus"]}
+style_subtitle=${__VARSFX___colors["yellow"]}""${__VARSFX___puces["minus"]}
+style_subsubtitle=${__VARSFX___colors["yellow"]}"  "${__VARSFX___puces["minus"]}
+
+######################################################################
+# FUNCTIONS: 
+######################################################################
+function newScriptTemplate {
+	echo "Function template"	
+	}
+######################################################################
+# ARGS: 
+######################################################################
+args=("$@")
+nb_args=$#
+for no_arg in $(seq 0 $nb_args); do
+	value=${args[$no_arg]}
+	if [ ${#value} -gt 0 ];then
+		#parametre speciaux
+		#affichage aide 
+		if [ "$value" = "--help" ] || [ "$value" = "-h" ];then
+			echo -e "S.O.S!"
+			exit
+		fi
+	fi
+done
+######################################################################
+# MAIN PROGRAM: 
+######################################################################
+
+######################################################################
+# END: 
+######################################################################
