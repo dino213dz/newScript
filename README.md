@@ -1,7 +1,7 @@
 # DESCRIPTION:
  - This Script will help you creating new scripts according to a template and a configuration file
 
-#ABOUT
+# ABOUT
  - Author: CHORFA Alla-eddine a.k.a. Dino
  - Author: h4ckr213dz@gmail.com
  - Author: https://github.com/dino213dz
