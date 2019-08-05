@@ -52,9 +52,9 @@ OLDIFS="$IFS"
 ######################################################################
 # FUNCTIONS: 
 ######################################################################
-######################################################################
-# ARGS: 
-######################################################################
+function afficherAide {
+	echo -e "$0 --name 'myNewScriptName.sh' --desc 'My script description here'"
+	}
 ######################################################################
 # ARGS: 
 ######################################################################
@@ -83,18 +83,30 @@ for no_arg in $(seq 0 $nb_args); do
 done
 if [ "$paramGetHelp" = "TRUE" ];then
 	echo -e "S.O.S!"
-	echo -e "$0 --name 'myNewScriptName.sh' --desc 'My script description here'"
+	afficherAide
 	exit
 else
-	echo -e $style_title""${d213_steps[0]}": "
-	echo -en $style_subtitle""$newScript_config
-	source $newScript_config
-	echo -e $style_text_okay"...Done!"
-	echo -en $style_subtitle""$newScript_template
-	echo -e $style_text_okay"...Done!"
-	echo -e $style_title""${d213_steps[1]}": "
-	echo -e $style_subtitle"New script filename:$style_text $newScript_name"
-	echo -e $style_subtitle"New script description:$style_text $newScript_description"
+	if [ ${#newScript_name} -gt 0 ];then
+		if [ ${#newScript_description} -gt 0 ];then
+			echo -e $style_title""${d213_steps[0]}": "
+			echo -en $style_subtitle""$newScript_config
+			source $newScript_config
+			echo -e $style_text_okay"...Done!"
+			echo -en $style_subtitle""$newScript_template
+			echo -e $style_text_okay"...Done!"
+			echo -e $style_title""${d213_steps[1]}": "
+			echo -e $style_subtitle"New script filename:$style_text $newScript_name"
+			echo -e $style_subtitle"New script description:$style_text $newScript_description"
+		else
+			echo -e "Il manque la description du script:"
+			afficherAide
+			exit 1
+		fi
+	else
+		echo -e "Il manque le nom du script!"
+		afficherAide
+		exit 1
+	fi
 fi
 
 # verifier les arguments
@@ -119,7 +131,8 @@ echo -e $style_text_okay"...Done!"
 echo -e $style_title""${d213_steps[3]}": "
 echo -en $style_subtitle"Filename:$style_text $newScript_name"
 IFS=' '
-while read template_line ; do
+#echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+while read -r template_line ; do
 	template_line=${template_line//'__VARSFX__'/"$newScript_varSuffix"}
 	template_line=${template_line//'__AUTHOR__'/"$newScript_author"}
 	template_line=${template_line//'__EMAIL__'/"$newScript_email"}
@@ -130,7 +143,9 @@ while read template_line ; do
 	template_line=${template_line//'__DATEUPDATED__'/"$newScript_dateUpdated"}
 	template_line=${template_line//'__SCRIPTNAME__'/"$newScript_name"}
 	echo "$template_line" >> "$newScript_name"
+	#echo "$template_line";sleep 0.1
 done < "$newScript_template"
+#echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 IFS=$OLDIFS
 echo -e $style_text_okay"...Done!"
 ######################################################################
